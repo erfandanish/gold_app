@@ -1,14 +1,4 @@
 <?php
-/**
- * index.php
- * Single entry-point page. Reads config, fetches both APIs server-side,
- * joins with the database, runs the required calculations and renders
- * one HTML table.
- *
- * Place this whole project folder inside your XAMPP htdocs directory,
- * e.g.  C:\xampp\htdocs\gold-jewellery-app\
- * then browse to  http://localhost/gold-jewellery-app/
- */
 
 require __DIR__ . '/db/db.php';
 require __DIR__ . '/services/GoldPriceApi.php';
@@ -31,7 +21,7 @@ try {
     }
     $config = require $configFile;
 
-    // 1. Fetch both third-party APIs server-side (keys never reach the browser).
+    // 1. Fetch both third-party APIs server-side.
     $goldPrice    = get_gold_price_usd_per_ounce($config['gold_api_key']);
     $exchangeRate = get_usd_to_myr_rate($config['exchange_api_key']);
 
