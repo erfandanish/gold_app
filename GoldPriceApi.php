@@ -47,8 +47,7 @@ function get_gold_price_usd_per_ounce(string $apiKey): array
         throw new Exception('MetalpriceAPI error: ' . $message);
     }
 
-    // Prefer the ready-made "USDXAU" field (USD price per ounce of gold).
-    // Fall back to inverting rates.XAU (ounces of gold per 1 USD) if needed.
+    
     if (isset($data['rates']['USDXAU'])) {
         $pricePerOunceUsd = (float) $data['rates']['USDXAU'];
         $sourceField = 'rates.USDXAU';
