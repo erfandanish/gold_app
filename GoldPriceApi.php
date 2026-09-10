@@ -1,32 +1,9 @@
 <?php
 /**
- * services/GoldPriceApi.php
- *
  * API 1 - Gold Price API (MetalpriceAPI)
- * Docs: https://metalpriceapi.com/documentation
- *
- * Endpoint used:
- *   GET https://api.metalpriceapi.com/v1/latest?api_key=KEY&base=USD&currencies=XAU
- *
- * MetalpriceAPI's "latest" endpoint returns rates expressed as
- * "1 unit of base = X units of target". With base=USD and currencies=XAU,
- * rates.XAU is a fraction of a troy ounce per 1 USD (e.g. 0.00053853).
- * The API also returns a ready-made "USDXAU" field which is already the
- * gold price in USD per troy ounce (1 / rates.XAU), so that field is used
- * directly and we fall back to the manual inversion if it is ever missing.
- *
- * The MetalpriceAPI free plan provides delayed daily data, so the value
- * returned here must be described as the "latest available" price, not
- * a real-time price.
  */
 
-/**
- * Fetch the latest available XAU/USD gold spot price.
- *
- * @param string $apiKey MetalpriceAPI API key.
- * @return array{provider:string, price_per_ounce_usd:float, source_field:string, unit:string, updated_at:string}
- * @throws Exception
- */
+
 function get_gold_price_usd_per_ounce(string $apiKey): array
 {
     if ($apiKey === '') {
