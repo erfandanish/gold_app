@@ -1,33 +1,20 @@
--- =====================================================================
--- Gold Jewellery Consumer Web APIs Integration
--- MySQL schema, sample data and JOIN query (for XAMPP / phpMyAdmin)
--- =====================================================================
--- How to use:
---   1. Open phpMyAdmin (http://localhost/phpmyadmin) with XAMPP running.
---   2. Create a database, e.g. "gold_jewellery".
---   3. Select it, open the "SQL" tab, paste this whole file, and run it.
---      (Or: mysql -u root gold_jewellery < schema.sql from a terminal.)
--- =====================================================================
+
 
 CREATE DATABASE IF NOT EXISTS gold_jewellery;
 USE gold_jewellery;
 
--- ---------------------------------------------------------------------
--- 1. CREATE TABLE STATEMENTS
--- ---------------------------------------------------------------------
 
 DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS GoldProducts;
 DROP TABLE IF EXISTS Customers;
 
--- Customers: one row per customer
+
 CREATE TABLE Customers (
     customer_id     INT AUTO_INCREMENT PRIMARY KEY,
     customer_name   VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 
--- GoldProducts: one row per product the shop sells
--- purity is stored as an integer per-mille value, e.g. 999, 916, 750
+
 CREATE TABLE GoldProducts (
     product_id      INT AUTO_INCREMENT PRIMARY KEY,
     product_name    VARCHAR(150) NOT NULL,
@@ -36,8 +23,7 @@ CREATE TABLE GoldProducts (
     purity          SMALLINT NOT NULL
 ) ENGINE=InnoDB;
 
--- Orders: links a customer to a product they bought
--- customer_id and product_id are foreign keys referencing Customers and GoldProducts
+
 CREATE TABLE Orders (
     order_id        INT AUTO_INCREMENT PRIMARY KEY,
     customer_id     INT NOT NULL,
@@ -48,9 +34,6 @@ CREATE TABLE Orders (
     CONSTRAINT fk_orders_product  FOREIGN KEY (product_id)  REFERENCES GoldProducts(product_id)
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 2. INSERT STATEMENTS (3 records per table)
--- ---------------------------------------------------------------------
 
 INSERT INTO Customers (customer_id, customer_name) VALUES
     (1, 'Tan Mei Ling'),
@@ -67,10 +50,7 @@ INSERT INTO Orders (order_id, customer_id, product_id, quantity, order_date) VAL
     (2, 2, 2, 1, '2026-08-03'),
     (3, 3, 3, 3, '2026-08-05');
 
--- ---------------------------------------------------------------------
--- 3. SQL JOIN QUERY
--- Combines Customers, GoldProducts and Orders via their foreign keys
--- ---------------------------------------------------------------------
+
 
 SELECT
     o.order_id         AS order_id,
