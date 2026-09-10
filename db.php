@@ -1,9 +1,4 @@
 <?php
-/**
- * db/db.php
- * Opens a PDO connection to MySQL and exposes the JOIN query required
- * by the assignment (Section 3).
- */
 
 function get_db_connection(array $config): PDO
 {
@@ -16,10 +11,7 @@ function get_db_connection(array $config): PDO
     ]);
 }
 
-/**
- * The SQL JOIN query required by the assignment: combines Customers,
- * GoldProducts and Orders through their foreign keys.
- */
+
 const ORDERS_JOIN_QUERY = <<<SQL
     SELECT
         o.order_id          AS order_id,
