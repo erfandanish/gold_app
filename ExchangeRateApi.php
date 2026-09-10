@@ -1,32 +1,9 @@
 <?php
 /**
- * services/ExchangeRateApi.php
- *
  * API 2 - Currency Exchange API (AbstractAPI Exchange Rates)
- * Docs: https://docs.abstractapi.com/api/exchange-rates
- *
- * Endpoint used:
- *   GET https://exchange-rates.abstractapi.com/v1/live?api_key=KEY&base=USD&target=MYR
- *
- * Response shape:
- *   {
- *     "base": "USD",
- *     "last_updated": 1699999999,
- *     "exchange_rates": { "MYR": 4.71, ... }
- *   }
- *
- * AbstractAPI states free-plan data is normally updated every 45-60
- * minutes, so the value returned here must be labelled as the "latest
- * available" exchange rate, not a real-time rate.
  */
 
-/**
- * Fetch the latest available USD -> MYR exchange rate.
- *
- * @param string $apiKey AbstractAPI Exchange Rates API key.
- * @return array{provider:string, base:string, target:string, rate:float, source_field:string, updated_at:string}
- * @throws Exception
- */
+
 function get_usd_to_myr_rate(string $apiKey): array
 {
     if ($apiKey === '') {
