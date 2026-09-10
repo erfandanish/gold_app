@@ -20,9 +20,6 @@ function get_usd_to_myr_rate(string $apiKey): array
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_TIMEOUT        => 15,
-        // AbstractAPI (and the CDN in front of it) sometimes answers with a
-        // 301 redirect (e.g. onto a canonical URL). Without this, curl
-        // reports the 301 itself as a failure instead of following it.
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_MAXREDIRS      => 5,
         CURLOPT_USERAGENT      => 'gold-jewellery-app/1.0',
